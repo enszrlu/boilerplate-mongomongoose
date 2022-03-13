@@ -12,23 +12,28 @@ const personSchema = new mongoose.Schema({
 
 let Person = mongoose.model('Person', personSchema);
 
-function mongooseCallback(err, data) {
-  if (err) return console.error(err);
-  done(null, data)
-}
 
 const createAndSavePerson = (done) => {
   console.log('inside func')
   let document = new Person({ name: "Enes", age: 28, favoriteFoods: ["Manti", "Lahmacun", "Pide", "Koy Dolmasi"] })
-  document.save(mongooseCallback);
+  document.save((err, data) => {
+    if (err) return console.error(err);
+    done(null, data)
+  });
 };
 
 const createManyPeople = (arrayOfPeople, done) => {
-  Person.create(arrayOfPeople, mongooseCallback);
+  Person.create(arrayOfPeople, (err, people) => {
+    if (err) return console.error(err);
+    done(null, people)
+  });
 };
 
 const findPeopleByName = (personName, done) => {
-  Person.find({ name: personName }, mongooseCallback);
+  Person.find({ name: personName }, (err, people) => {
+    if (err) return console.error(err);
+    done(null, people)
+  })
 };
 
 const findOneByFood = (food, done) => {
