@@ -20,15 +20,15 @@ function mongooseCallback(err, data) {
 const createAndSavePerson = (done) => {
   console.log('inside func')
   let document = new Person({ name: "Enes", age: 28, favoriteFoods: ["Manti", "Lahmacun", "Pide", "Koy Dolmasi"] })
-  document.save(mongooseCallback(err, data));
+  document.save(mongooseCallback);
 };
 
 const createManyPeople = (arrayOfPeople, done) => {
-  Person.create(arrayOfPeople, mongooseCallback(err, data));
+  Person.create(arrayOfPeople, mongooseCallback);
 };
 
 const findPeopleByName = (personName, done) => {
-  Person.find({ name: personName }, mongooseCallback(err, data));
+  Person.find({ name: personName }, mongooseCallback);
 };
 
 const findOneByFood = (food, done) => {
